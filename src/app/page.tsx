@@ -1,103 +1,200 @@
-import Image from "next/image";
+import React, { JSX } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { siteConfig } from '@/config/site';
+import { HeartPulse, Stethoscope, Clock, Users, Activity, Phone, Mail, Baby, Syringe, Pill, Microscope, CalendarCheck, UserCheck } from 'lucide-react';
+
+// Direct imports for all sections
+import HeroSection from '@/components/sections/HeroSection';
+import ServicesSection from '@/components/sections/ServicesSection';
+import AboutSection from '@/components/sections/AboutSection';
+import FeaturesSection from '@/components/sections/FeaturesSection';
+import DoctorsSection from '@/components/sections/DoctorsSection';
+import TestimonialsSection from '@/components/sections/TestimonialsSection';
+import CtaSection from '@/components/sections/CtaSection';
+
+const doctors = [
+  {
+    name: siteConfig.medicalTeam.director.name,
+    specialty: siteConfig.medicalTeam.director.title,
+    experience: '15+ years',
+    image: '/images/bmc_doctor_on_desk.jpg',
+    description: siteConfig.medicalTeam.director.bio
+  },
+  ...siteConfig.medicalTeam.doctors.map(doctor => ({
+    name: doctor.name,
+    specialty: doctor.specialty,
+    experience: '10+ years',
+    image: '/images/doctors/' + doctor.name.toLowerCase().replace(/\s+/g, '-') + '.jpg',
+    description: `Licensed ${doctor.specialty} with extensive experience in patient care.`
+  }))
+];
+
+const stats = [
+  { id: 1, name: 'Years of Service', value: `${new Date().getFullYear() - parseInt(siteConfig.about.established)}+`, icon: Clock },
+  { id: 2, name: 'Expert Doctors', value: `${siteConfig.medicalTeam.doctors.length + 1}+`, icon: Stethoscope },
+  { id: 3, name: 'Nursing Staff', value: `${siteConfig.medicalTeam.nurses.length}+`, icon: Users },
+  { id: 4, name: 'Specialties', value: `${siteConfig.services.length}+`, icon: Activity },
+];
+
+const testimonials = [
+  {
+    id: 1,
+    name: 'James Wilson',
+    role: 'Patient',
+    content: 'The care I received at Balm Medical Centre was exceptional. The doctors took the time to listen to my concerns and provided excellent treatment.',
+    rating: 5,
+    image: '/images/testimonials/person1.jpg'
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    role: 'Patient',
+    content: 'The staff was incredibly kind and professional. The facilities are clean and modern. Highly recommend this medical centre!',
+    rating: 5,
+    image: '/images/testimonials/person2.jpg'
+  },
+  {
+    id: 3,
+    name: 'David Kim',
+    role: 'Patient',
+    content: 'Quick service and knowledgeable doctors. They made me feel comfortable throughout my treatment.',
+    rating: 4,
+    image: '/images/testimonials/person3.jpg'
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const services = siteConfig.services.map((service: string) => {
+    // Map service names to Lucide icons
+    const getIcon = (serviceName: string) => {
+      const iconClass = "w-8 h-8 text-blue-600";
+      const iconProps = { className: iconClass };
+      
+      const iconMap: {[key: string]: JSX.Element} = {
+        'obstetrics and gynecology': <Baby {...iconProps} />,
+        'surgery': <Syringe {...iconProps} />,
+        'general practice and family medicine': <UserCheck {...iconProps} />,
+        'hospice and follow-up care': <HeartPulse {...iconProps} />,
+        'pharmacy': <Pill {...iconProps} />,
+        'laboratory services': <Microscope {...iconProps} />
+      };
+      
+      const defaultIcon = <Stethoscope {...iconProps} />;
+      
+      // Find a matching icon (case insensitive)
+      const normalizedService = serviceName.toLowerCase();
+      return iconMap[normalizedService] || defaultIcon;
+    };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    // Map service names to descriptions
+    const getDescription = (serviceName: string): string => {
+      const descriptions: Record<string, string> = {
+        'Obstetrics and Gynecology': 'Comprehensive women\'s health services including prenatal care, delivery, and gynecological services.',
+        'Surgery': 'Advanced surgical procedures with modern techniques and minimal recovery time.',
+        'General Practice and Family Medicine': 'Primary healthcare for the whole family, from infants to seniors.',
+        'Hospice and Follow-up Care': 'Compassionate end-of-life care and ongoing support for patients and families.',
+        'Pharmacy': 'Fully stocked pharmacy with a wide range of medications and professional consultation.',
+        'Laboratory Services': 'State-of-the-art diagnostic testing and laboratory services for accurate results.'
+      };
+      return descriptions[serviceName] || 'Professional medical services provided by our expert team.';
+    };
+
+    return {
+      title: service,
+      description: getDescription(service),
+      icon: getIcon(service)
+    };
+  });
+
+  const features = [
+    {
+      title: '24/7 Availability',
+      description: siteConfig.operatingHours.general
+    },
+    {
+      title: 'Experienced Specialists',
+      description: `Our team includes ${siteConfig.medicalTeam.doctors.length + 1} experienced doctors across various specialties.`
+    },
+    {
+      title: 'Patient-Centered Care',
+      description: 'Personalized treatment plans tailored to your unique health needs and goals.'
+    },
+    {
+      title: 'Modern Facilities',
+      description: 'State-of-the-art medical equipment and comfortable facilities for your care.'
+    },
+    {
+      title: 'Comprehensive Services',
+      description: `From ${siteConfig.services[0].toLowerCase()} to ${siteConfig.services[siteConfig.services.length - 1].toLowerCase()}, we've got you covered.`
+    },
+    {
+      title: 'Emergency Services',
+      description: siteConfig.operatingHours.emergency
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Secondary Hero Section */}
+      <section className="relative bg-blue-900 text-white">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-black/60" />
+          <Image
+            src="/images/bmc_medical_bed.jpg"
+            alt="Balm Medical Centre building"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+          <div className="max-w-2xl text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Your Health is Our Top Priority
+            </h1>
+            <p className="mt-6 text-xl text-blue-100 max-w-3xl">
+              At {siteConfig.hospitalName}, we provide exceptional healthcare services with compassion and expertise. Our dedicated team is committed to your well-being.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-8 transition-colors"
+              >
+                Book an Appointment
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-8 transition-colors"
+              >
+                Our Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <ServicesSection services={services} />
+
+      {/* About Section */}
+      <AboutSection />
+
+      {/* Features Section */}
+      <FeaturesSection features={features} />
+
+      {/* Doctors Section */}
+      <DoctorsSection doctors={doctors} />
+
+      {/* Testimonials Section */}
+      <TestimonialsSection testimonials={testimonials} />
+
+      {/* CTA Section */}
+      <CtaSection />
     </div>
   );
 }

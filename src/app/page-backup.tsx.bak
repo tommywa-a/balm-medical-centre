@@ -1,0 +1,488 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { siteConfig } from '@/config/site';
+import { HeartPulse, Stethoscope, Clock, Users, Activity, Phone, Mail } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+const doctors = [
+  {
+    name: siteConfig.medicalTeam.director.name,
+    specialty: siteConfig.medicalTeam.director.title,
+    experience: '15+ years',
+    image: '/images/bmc_doctor_on_desk.jpg',
+    description: siteConfig.medicalTeam.director.bio
+  },
+  ...siteConfig.medicalTeam.doctors.map(doctor => ({
+    name: doctor.name,
+    specialty: doctor.specialty,
+    experience: '10+ years',
+    image: '/images/doctors/' + doctor.name.toLowerCase().replace(/\s+/g, '-') + '.jpg',
+    description: `Licensed ${doctor.specialty} with extensive experience in patient care.`
+  }))
+];
+
+const stats = [
+  { id: 1, name: 'Patients Treated', value: '10,000+', icon: Users },
+  { id: 2, name: 'Expert Doctors', value: '10+', icon: Stethoscope },
+  { id: 3, name: 'Years of Experience', value: '5+', icon: Clock },
+  { id: 4, name: 'Success Rate', value: '98%', icon: Activity },
+];
+
+const testimonials = [
+  {
+    id: 1,
+    name: 'James Wilson',
+    role: 'Patient',
+    content: 'The care I received at Balm Medical Center was exceptional. The doctors took the time to listen to my concerns and provided excellent treatment.',
+    rating: 5,
+    image: '/images/testimonials/person1.jpg'
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    role: 'Patient',
+    content: 'The staff was incredibly kind and professional. The facilities are clean and modern. Highly recommend this medical center!',
+    rating: 5,
+    image: '/images/testimonials/person2.jpg'
+  },
+  {
+    id: 3,
+    name: 'David Kim',
+    role: 'Patient',
+    content: 'Quick service and knowledgeable doctors. They made me feel comfortable throughout my treatment.',
+    rating: 4,
+    image: '/images/testimonials/person3.jpg'
+  },
+];
+
+export default function Home() {
+  const services = [
+    {
+      title: 'Emergency Care',
+      description: '24/7 emergency medical services with rapid response times.',
+      icon: <HeartPulse className="w-8 h-8 text-blue-600" />
+    },
+    {
+      title: 'General Medicine',
+      description: 'Comprehensive healthcare for patients of all ages with personalized treatment plans.',
+      icon: <Stethoscope className="w-8 h-8 text-blue-600" />
+    },
+    {
+      title: 'Pediatrics',
+      description: 'Specialized care for infants, children, and adolescents in a child-friendly environment.',
+      icon: <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    },
+    {
+      title: 'Surgery',
+      description: 'Advanced surgical procedures with modern techniques and minimal recovery time.',
+      icon: <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+      </svg>
+    },
+    {
+      title: 'Cardiology',
+      description: 'Comprehensive heart care with advanced diagnostic and treatment options.',
+      icon: <HeartPulse className="w-8 h-8 text-blue-600" />
+    },
+    {
+      title: 'Dermatology',
+      description: 'Expert care for all skin conditions, from acne to skin cancer screening.',
+      icon: <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    }
+  ];
+
+  const features = [
+    {
+      title: '24/7 Emergency Care',
+      description: 'Round-the-clock emergency services with rapid response teams ready to assist you at any time.'
+    },
+    {
+      title: 'Expert Medical Team',
+      description: 'Our board-certified physicians and specialists provide the highest standard of care.'
+    },
+    {
+      title: 'Advanced Technology',
+      description: 'State-of-the-art diagnostic and treatment facilities for accurate and effective care.'
+    },
+    {
+      title: 'Patient-Centered Approach',
+      description: 'Personalized treatment plans tailored to your unique health needs and goals.'
+    },
+    {
+      title: 'Comprehensive Services',
+      description: 'From preventive care to specialized treatments, we cover all aspects of your health.'
+    },
+    {
+      title: 'Comfortable Facilities',
+      description: 'Modern, clean, and comfortable environment designed for your healing and comfort.'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/bmc_doctor_on_desk.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:py-32 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Exceptional Healthcare <span className="text-blue-300">for Your Family</span>
+              </h1>
+              <p className="mt-6 text-xl text-blue-100 max-w-2xl mx-auto lg:mx-0">
+                At Balm Medical Center, we provide comprehensive medical services with compassion, expertise, and the latest medical technology.
+              </p>
+              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6">
+                  <Link href="/appointment">Book an Appointment</Link>
+                </Button>
+                <Button variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-8 py-6">
+                  <Link href="/services">Our Services</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="relative h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-2xl">
+              <Image
+                src="/images/bmc_doctor_on_desk.jpg"
+                alt="Caring doctor at Balm Medical Center"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Stats Section */}
+        <div className="relative bg-white/10 backdrop-blur-sm py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+              {stats.map((stat) => (
+                <div key={stat.id} className="text-center">
+                  <div className="flex items-center justify-center h-12 w-12 mx-auto rounded-full bg-blue-600 text-white mb-3">
+                    <stat.icon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <p className="text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="text-sm font-medium text-blue-100">{stat.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Hero Section */}
+      <section className="relative bg-blue-900 text-white">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-black/60" />
+          <Image
+            src="/images/bmc_medical_bed.jpg"
+            alt="Balm Medical Center building"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Your Health is Our Top Priority
+            </h1>
+            <p className="mt-6 text-xl text-blue-100 max-w-3xl">
+              At {siteConfig.hospitalName}, we provide exceptional healthcare services with compassion and expertise. Our dedicated team is committed to your well-being.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/appointment"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-8 transition-colors"
+              >
+                Book an Appointment
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-8 transition-colors"
+              >
+                Our Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full mb-4">
+              Our Services
+            </span>
+            <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+              Comprehensive Healthcare Services
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              We offer a wide range of essential services including {siteConfig.services.slice(0, -1).join(', ')} and {siteConfig.services.slice(-1)[0]} to meet all your healthcare needs, from routine check-ups to specialized treatments.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div 
+                key={index} 
+                className="group relative bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="p-8">
+                  <div className="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors">
+                    <Link href={`/services#${service.title.toLowerCase().replace(/\s+/g, '-')}`} className="flex items-center">
+                      Learn more
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Button asChild variant="outline" size="lg" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Link href="/services">
+                View All Services
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="bg-gray-50 py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+            <div className="mb-8 lg:mb-0">
+              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                About {siteConfig.hospitalName}
+              </h2>
+              <p className="mt-4 text-lg text-gray-600">
+                {siteConfig.about.description}
+              </p>
+              <p className="mt-4 text-lg text-gray-600">
+                Established in {siteConfig.about.established}, we continue to serve our community with state-of-the-art facilities and advanced medical technology.
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/about"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                >
+                  Learn more about us
+                </Link>
+              </div>
+            </div>
+            <div className="relative h-64 sm:h-96 lg:h-full">
+              <Image
+                src="/images/bmc_receptionist.jpg"
+                alt="Friendly receptionist at Balm Medical Center"
+                fill
+                className="rounded-lg object-cover shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full mb-4">
+              Why Choose Us
+            </span>
+            <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+              Exceptional Care, Exceptional Results
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              We're committed to delivering the highest quality healthcare with compassion and expertise.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div 
+                key={index} 
+                className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100"
+              >
+                <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6">
+                  <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Meet Our Doctors Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full mb-4">
+              Our Team
+            </span>
+            <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+              Meet Our Expert Doctors
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              Our team of experienced healthcare professionals is dedicated to providing you with the best possible care.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {doctors.map((doctor, index) => (
+              <div key={index} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div className="relative h-80">
+                  <Image
+                    src={
+                      index === 0 ? "/images/bmc_doctor_on_desk.jpg" :
+                      index === 1 ? "/images/bmc_medical_bed.jpg" :
+                      "/images/bmc_waiting_area.jpg"
+                    }
+                    alt={`${doctor.name}, ${doctor.specialty}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div>
+                      <p className="text-white text-sm font-medium">{doctor.experience} of experience</p>
+                      <p className="text-white text-sm">{doctor.description}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900">{doctor.name}</h3>
+                  <p className="text-blue-600 font-medium">{doctor.specialty}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button asChild variant="outline" size="lg" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Link href="/doctors">
+                Meet All Doctors
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full mb-4">
+              Testimonials
+            </span>
+            <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+              What Our Patients Say
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              Hear from the people who have experienced our care firsthand.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.id} className="bg-white p-8 rounded-xl shadow-md">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className={`h-5 w-5 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-600 italic mb-6">"{testimonial.content}"</p>
+                <div className="flex items-center">
+                  <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                    <div className="w-full h-full flex items-center justify-center bg-blue-100 text-blue-600">
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative bg-gradient-to-r from-blue-800 to-blue-600 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10"></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+              <span className="block">Ready to prioritize your health?</span>
+              <span className="block text-blue-200">Book an appointment today.</span>
+            </h2>
+            <p className="mt-6 max-w-2xl mx-auto text-xl text-blue-100">
+              Our team of healthcare professionals is ready to provide you with exceptional care. {siteConfig.operatingHours.emergency}
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6">
+                <Link href="/appointment">Book Appointment</Link>
+              </Button>
+              <Button variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 text-lg px-8 py-6">
+                <Link href="/contact">Contact Us</Link>
+              </Button>
+            </div>
+            <div className="mt-8 flex items-center justify-center space-x-6">
+              <div className="flex items-center">
+                <Phone className="h-6 w-6 text-blue-200" />
+                <a href={`tel:${siteConfig.phone.replace(/\D/g, '')}`} className="ml-2 text-blue-100 hover:text-white">
+                  {siteConfig.phone}
+                </a>
+              </div>
+              <div className="flex items-center">
+                <Mail className="h-6 w-6 text-blue-200" />
+                <a href={`mailto:${siteConfig.email}`} className="ml-2 text-blue-100 hover:text-white">
+                  {siteConfig.email}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
