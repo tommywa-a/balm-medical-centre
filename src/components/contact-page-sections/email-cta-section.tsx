@@ -47,7 +47,10 @@ export const EmailCTASection = () => {
                               // Fallback for older browsers
                               const textArea = document.createElement('textarea');
                               textArea.value = email;
-                              textArea.style.position = 'fixed';  // Avoid scrolling to bottom
+                              // Position fixed to avoid scrolling, and off-screen to be invisible.
+                              textArea.style.position = 'fixed';
+                              textArea.style.top = '-9999px';
+                              textArea.style.left = '-9999px';
                               document.body.appendChild(textArea);
                               textArea.focus();
                               textArea.select();
