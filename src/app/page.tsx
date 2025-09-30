@@ -30,12 +30,12 @@ const doctors = [
   }))
 ];
 
-const stats = [
-  { id: 1, name: 'Years of Service', value: `${new Date().getFullYear() - parseInt(siteConfig.about.established)}+`, icon: Clock },
-  { id: 2, name: 'Expert Doctors', value: `${siteConfig.medicalTeam.doctors.length + 1}+`, icon: Stethoscope },
-  { id: 3, name: 'Nursing Staff', value: `${siteConfig.medicalTeam.nurses.length}+`, icon: Users },
-  { id: 4, name: 'Specialties', value: `${siteConfig.services.length}+`, icon: Activity },
-];
+// const stats = [
+//   { id: 1, name: 'Years of Service', value: `${new Date().getFullYear() - parseInt(siteConfig.about.established)}+`, icon: Clock },
+//   { id: 2, name: 'Expert Doctors', value: `${siteConfig.medicalTeam.doctors.length + 1}+`, icon: Stethoscope },
+//   { id: 3, name: 'Nursing Staff', value: `${siteConfig.medicalTeam.nurses.length}+`, icon: Users },
+//   { id: 4, name: 'Specialties', value: `${siteConfig.services.length}+`, icon: Activity },
+// ];
 
 const testimonials = [
   {
