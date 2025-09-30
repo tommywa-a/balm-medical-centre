@@ -40,7 +40,7 @@ const doctors = [
 const testimonials = [
   {
     id: 1,
-    name: 'James Wilson',
+    name: 'James Ojo',
     role: 'Patient',
     content: 'The care I received at Balm Medical Centre was exceptional. The doctors took the time to listen to my concerns and provided excellent treatment.',
     rating: 5,
@@ -48,7 +48,7 @@ const testimonials = [
   },
   {
     id: 2,
-    name: 'Maria Garcia',
+    name: 'Maria Davis',
     role: 'Patient',
     content: 'The staff was incredibly kind and professional. The facilities are clean and modern. Highly recommend this medical centre!',
     rating: 5,
@@ -56,7 +56,7 @@ const testimonials = [
   },
   {
     id: 3,
-    name: 'David Kim',
+    name: 'Amaka Chinemere',
     role: 'Patient',
     content: 'Quick service and knowledgeable doctors. They made me feel comfortable throughout my treatment.',
     rating: 4,
