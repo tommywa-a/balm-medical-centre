@@ -4,7 +4,7 @@ import { Phone, Mail, Stethoscope, BadgeCheck, Users, ClipboardList } from "luci
 import Image from "next/image";
 
 export default function DoctorsPage() {
-  const { medicalTeam, hospitalName } = siteConfig;
+  const { medicalTeam } = siteConfig;
   const { director, doctors, nurses } = medicalTeam;
 
   // Calculate years of experience for each doctor
@@ -199,7 +199,7 @@ export default function DoctorsPage() {
               Join Our Medical Team
             </h2>
             <p className="mt-4 text-xl text-blue-100 max-w-3xl mx-auto">
-              We're always looking for talented healthcare professionals to join our team
+              We&apos;re always looking for talented healthcare professionals to join our team
             </p>
             <div className="mt-8">
               <a

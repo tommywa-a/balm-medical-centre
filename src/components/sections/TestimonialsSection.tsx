@@ -42,7 +42,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-600 italic mb-6">"{testimonial.content}"</p>
+                <p className="text-gray-600 italic mb-6">&quot;{testimonial.content}&quot;</p>
               </div>
               <div className="flex items-center">
                 <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden mr-4">

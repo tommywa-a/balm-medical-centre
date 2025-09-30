@@ -19,7 +19,7 @@ export default function FeaturesSection({ features }: FeaturesSectionProps) {
             Exceptional Care, Exceptional Results
           </h2>
           <p className="mt-4 text-xl text-gray-600">
-            We're committed to delivering the highest quality healthcare with compassion and expertise.
+            We&apos;re committed to delivering the highest quality healthcare with compassion and expertise.
           </p>
         </div>
 
