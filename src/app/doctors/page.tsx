@@ -1,5 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
 import { Phone, Mail, Stethoscope, BadgeCheck, Users, ClipboardList } from "lucide-react";
 import Image from "next/image";

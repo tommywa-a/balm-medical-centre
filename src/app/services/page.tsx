@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
-import { Stethoscope, HeartPulse, Syringe, Pill, Microscope, CalendarCheck, Phone } from "lucide-react";
+import { Stethoscope, HeartPulse, Pill, Microscope, CalendarCheck, Phone } from "lucide-react";
 import Image from "next/image";
 
 export default function ServicesPage() {

@@ -1,9 +1,8 @@
 import React, { JSX } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
-import { HeartPulse, Stethoscope, Clock, Users, Activity, Phone, Mail, Baby, Syringe, Pill, Microscope, CalendarCheck, UserCheck } from 'lucide-react';
+import { HeartPulse, Stethoscope, Clock, Users, Activity, Baby, Syringe, Pill, Microscope, UserCheck } from 'lucide-react';
 
 // Direct imports for all sections
 import HeroSection from '@/components/sections/HeroSection';

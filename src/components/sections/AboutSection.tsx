@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
-import { Check } from 'lucide-react';
 
 export default function AboutSection() {
   return (

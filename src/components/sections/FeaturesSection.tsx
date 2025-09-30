@@ -1,5 +1,3 @@
-import { siteConfig } from '@/config/site';
-
 type Feature = {
   title: string;
   description: string;
