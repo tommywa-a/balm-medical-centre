@@ -8,7 +8,8 @@ export const siteConfig = {
     expiryDate: "2024-12-31"
   },
   taxId: "BN123456789",
-  address: "No 3 Engr Kingsley Eke close, Nvuigwe Woji, Port Harcourt, Rivers State, Nigeria",
+  address: "No 3 Engr Kingsley Eke Close, Joshua Close, Nvuigwe Woji, Port Harcourt, Rivers State, Nigeria",
+  mapLink: "https://maps.app.goo.gl/VpyjcW7RnT4EJxM38",
   phone: "0803 937 7136",
   email: "balmmedicalcenter01@gmail.com",
   logo: "/images/bmc_logo.png",

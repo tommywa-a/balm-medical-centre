@@ -6,7 +6,7 @@ import Image from "next/image";
 // executeCommand(`mv ${file.path}.new ${file.path}`);
 
 export default function ContactPage() {
-  const { hospitalName, address, phone, email, operatingHours } = siteConfig;
+  const { hospitalName, address, mapLink, phone, email, operatingHours } = siteConfig;
 
   // Get social media links from siteConfig and filter out empty ones
   const socialLinks = [
@@ -59,7 +59,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-medium text-gray-900">Address</h3>
                     <p className="mt-1 text-gray-600">{address}</p>
                     <a 
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+                      href={mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-1 inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
@@ -154,7 +154,7 @@ export default function ContactPage() {
           
           <div className="rounded-xl overflow-hidden shadow-xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.372117157629!2d7.042100315328251!3d4.85575139647902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTEnMjAuNyJOIDfCsDAyJzMxLjUiRQ!5e0!3m2!1sen!2sng!4v1620000000000!5m2!1sen!2sng"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.708594786644!2d7.059932383353761!3d4.820015382664226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1069cd3e1fe5adb9%3A0xee89b27033b78fce!2sBalm%20Medical%20Center%20Limited!5e0!3m2!1sen!2sng!4v1759246445339!5m2!1sen!2sng"
               width="100%"
               height="450"
               style={{ border: 0 }}
