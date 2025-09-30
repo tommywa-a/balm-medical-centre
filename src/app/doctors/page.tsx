@@ -141,7 +141,7 @@ export default function DoctorsPage() {
                     </div>
                     <div className="mt-4">
                       <a
-                        href="/appointment"
+                        href="/contact"
                         className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
                       >
                         Book an appointment
